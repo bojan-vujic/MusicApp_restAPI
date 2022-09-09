@@ -1,0 +1,54 @@
+/* User profile page */
+.profile-card {
+  margin: 30px 0 20px 0;
+  width: 300px;
+  background: rgb(241, 244, 246);
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  box-shadow:
+    5px 5px 20px rgba(0, 0, 0, 0.3),
+   -5px 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.profile-pic {
+  width: 100%;
+  height: 260px;
+  filter: grayscale(0.2);
+  margin-bottom: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.profile-pic img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9);
+  transition: all 0.5s ease;
+}
+
+.profile-pic img:hover {
+  filter: grayscale(0);
+  transform: scale(1.1);
+  border-radius: 6px;
+  filter: brightness(1);
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+.welcome {
+  margin-bottom: 5px;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.user-data {
+  width: 100%;
+}
+
+.jumbotron {
+  padding: 20px;
+  margin-top: 50px;
+}

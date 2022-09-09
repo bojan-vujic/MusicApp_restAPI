@@ -1,0 +1,39 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+
+{% block body_block %}
+
+<h1 class="row d-flex justify-content-center m-4">All videos in db</h1>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      {% for video in videos %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="https://i.ytimg.com/vi/{{video.video_id}}/mqdefault.jpg"
+            preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"></img>
+          <div class="card-body">
+            <p class="card-text">{{video.title}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a type="button" href="https://youtube.com/watch?v={{video.video_id}}" title="Play video on YouTube" target="_blank" class="YouTube-button">
+                  <img width="50" class="YouTube-button-img" src="/media/navbar_imgs/YouTube-button.png" alt="">
+                </a>
+              </div>
+              <small class="text-muted">{{video.duration}}</small>
+              <h6 class="text-muted">views: {{video.viewCount}}</h6>
+              <a href="{% url 'add_to_personal' video.video_id %}" title="Add to personal collection">
+                <img width="40" src="/media/navbar_imgs/4315609.png" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

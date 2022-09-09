@@ -1,0 +1,60 @@
+
+<div class="row" id="youtube-search">
+  {% for video in videos %}
+  <div class="col-md-4">
+    <div class="card mb-4 shadow-sm">
+      <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{video.thumbnail}}"
+        preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"></img>
+      <div class="card-body">
+        <p class="card-text">{{video.title}}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <a type="button" href="{{video.url}}" target="_blank" title="Play video on YouTube" class="YouTube-button">
+              <img width="50" class="YouTube-button-img" src="/media/navbar_imgs/YouTube-button.png" alt="">
+            </a>
+          </div>
+          <small class="text-muted" title="Length of the video mm:ss">{{video.duration.mmss}}</small>
+          <h6 class="text-muted">views: {{video.viewCount}}</h6>
+          {% if video.video_id not in personal %}
+          <a style="cursor: pointer;" id="add_video_to_playlist"
+            hx-post="{% url 'add_to_personal' video_id=video.video_id %}" hx-target="#youtube-search"
+            title="Add to personal collection">
+
+            <img width="40" src="/media/navbar_imgs/add_song_to_playlist.png" alt="">
+            
+          </a>
+          {% else %}
+
+          <div title="This video is already in your playlist.">
+            <img width="40" src="/media/navbar_imgs/video_added.png" alt="">
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+
+
+
+
+
+<!-- 
+<div title="This video is already in your playlist.">
+  <img width="40" src="/media/navbar_imgs/video_added.png" alt="">
+</div> -->
+
+
+<!-- hx-delete="{#% url 'delete_update_item' item.id %}"
+  hx-target="#update-list"
+  hx-confirm="Are you sure you wish to delete this item?">Delete -->
+
+<!-- 
+<a href="{#% url 'add_to_personal' video.video_id %}" title="Add to personal collection">
+  <img width="40" src="/media/navbar_imgs/add_song_to_playlist.png" alt="">
+</a>
+-->

@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+
+{% block body_block %}
+  
+
+  {% if videos %}
+    <style>
+      body,
+      html {
+        /* background: url(/media/mesh.png) 100% 50% / cover; */
+        /* transition: left 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms; */
+        box-shadow:
+          0 0 100px rgb(20, 5, 20) inset,
+          0 0 200px rgba(51, 14, 53, 0.7) inset;
+        /* background: radial-gradient(transparent, rgb(44, 43, 43)), hotpink; */
+      }
+    </style>
+    <div id="hist-bg" class="jss4 vh-110"></div>
+    <div class="whole-screen">
+      {% include 'youtube/history-video-iframe.html' %}
+      {% include 'youtube/history-slider.html' %}
+      <div class="uir">
+        <div class="empty-left"></div>
+        <div class="loop-text">Loop any section of the video using the slider!</div>
+        <div class="empty-left"></div>
+      </div>
+      <div class="full-screen">
+        <h2 class="full-screen-info"></h2>
+      </div>
+    </div>
+    {% include 'youtube/history-video-header.html' %}
+    {% include 'youtube/history-partial.html' %}
+  {% else %}
+    <div class="mt-5 p-5">
+      <h2 class="row dflex justify-content-center text-center">You don't have any videos in your playlist.</h2>
+    </div>
+  {% endif %}
+  <script src="{% static 'js/full-screen-play.js' %}"></script>
+{% endblock %}

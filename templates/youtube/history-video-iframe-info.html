@@ -1,0 +1,42 @@
+
+<div id="iframe-info" class="video-info iframe-info">
+  <div class="iframe-info-left">
+    <div class="video-info-icon info-icon-btn">
+      <img src="/media/earth2.png"/>
+      <div class="title-span">Global repeats : {{video.global_repeats}}</div>
+      <div id="global-repeats">{{video.global_repeats}}</div>
+    </div>
+    
+    <div class="video-info-icon info-icon-btn">
+      <img src="/media/music-earth.png"/>
+      <div class="title-span">Global replay time : {{video.global_replays}}</div>
+      <div id="your-repeats">{{video.global_replays}}</div>
+    </div>
+    
+  </div>
+
+  <div class="iframe-info-right">
+    <div class="video-info-icon info-icon-btn" id="last-time-played-info">
+      <img src="/media/calendar.png"/>
+      <div class="title-span">Last time played : {{video.last_played|timesince}} ago</div>
+      <div>{{video.last_played|timesince}} ago</div>
+    </div>
+    
+    <div class="video-info-icon info-icon-btn">
+      <img src="/media/your-repeats.png"/>
+      <div class="title-span">Your repeats : {{video.repeats}}</div>
+      <div id="your-repeats">{{video.repeats}}</div>
+    </div>
+    
+    <div class="video-info-icon info-icon-btn">
+      <img src="/media/time_played.png"/>
+      <div class="title-span">Your replay time : {{video.your_replays}}</div>
+      <div id="your-repeats">{{video.your_replays}}</div>
+    </div>
+
+    <div class="full-screen-btn">
+      <img id="full-screen-btn-img" src="/media/full-screen-light.png" alt="" title="Black full screen play">
+    </div>
+    
+  </div>
+</div>

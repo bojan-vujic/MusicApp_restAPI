@@ -1,0 +1,57 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+  <br>
+  <br>
+  <br>
+  <div class="signup-form">
+    <h3>Login</h3>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <!-- {#% if messages %} -->
+        {% for message in messages %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul class="ul-error-list">
+              <li style="margin: 5px 0 -10px 0;"><strong>{{ message|safe|striptags }}</strong></li>
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      <!-- {#% endif %} -->
+      
+      <div class="form-group mb-2">
+        <label class="form-label m-0" for="username">Username:</label>
+        {% if username == "ok" %}
+          <input class="form-control m-0" type="text" name="username" placeholder="Username" />
+        {% else %}
+          <input class="form-control is-invalid m-0" type="text" name="username" placeholder="Username" />
+        {% endif %}
+      </div>
+
+      <label class="form-label m-0" for="password">Password:</label>
+      <div class="input-group">
+        {% if password == "ok" %}
+          <input  class="form-control" id="current-password" type="password" 
+            name="password" placeholder="Password" >
+        {% else %}
+          <input class="form-control is-invalid" id="current-password" type="password" name="password" placeholder="Password">
+        {% endif %}
+        <div class="input-group-text" id="btnGroupAddon">
+          <img src="/media/password-show.png" id="togglePassword">
+        </div>
+      </div>
+      
+
+      <h4 class="mt-4">Do not have an account? <a href="{% url 'signup' %}">Click here</a> to create one.</h4>
+
+      <input class="btn btn-secondary btn-block" type="submit" name="submit" value="Login">
+    </form>
+  </div>
+
+
+  <script src="{% static 'js/showPassword.js' %}"></script>
+
+{% endblock %}
+

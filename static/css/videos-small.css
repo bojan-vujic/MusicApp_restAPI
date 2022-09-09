@@ -1,0 +1,106 @@
+
+#video_iframe {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.video-info {
+  width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.main-container {
+  width: 70%;
+  max-width: 1100px;
+  margin: 0 auto 0 auto;
+}
+
+.iframe {
+  float: none;
+  clear: both;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  padding: 0;
+}
+
+.video-container-header,
+#history-list {
+  width: 100%;
+}
+
+
+/* Some display none that are normally applied for max-width 1200px */
+/* later on I can fix this */
+
+.favs,
+.video-buttons {
+  display: none;
+}
+
+.favs,
+.video-buttons {
+  display: none;
+}
+
+.video-container:hover .global-icon {
+  display: none;
+}
+
+.video-container:hover .video-buttons,
+.video-container:hover .favs {
+  display: none
+}
+
+@media (max-width: 1200px) {
+  .video-container-header h4 {
+    padding-left: 10px;
+  }
+
+  .main-container {
+    width: 90%
+  }
+
+  .favs, .video-buttons {
+    display: none;
+  }
+
+  .video-title-info {
+    width: 80%;
+  }
+
+  .video-container:hover .global-icon {
+    display: none;
+  }
+
+  .show-buttons {
+    display: flex;
+  }
+
+  .video-title-info {
+    width: calc(80% - 30px);
+  }
+
+  .video-container:hover .video-buttons,
+  .video-container:hover .favs {
+    display: none
+  }
+}
+
+@media (max-width: 780px) {
+  #last-time-played-info {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-container {
+    width: 98%;
+  }
+
+  .video-title-info {
+    gap: 0px;
+  }
+
+}

@@ -1,0 +1,277 @@
+<style>
+  /* rgb(104, 152, 194) */
+  * {
+    --padding: 15px;
+    --main-pink: rgb(239, 3, 97);
+  }
+
+  .header {
+    background-color: rgb(37, 37, 37);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding-left: var(--padding);
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    /* width: 8%; */
+  }
+
+  .nav-bar {
+    display: flex;
+    height: 70px;
+    justify-content: flex-end;
+    /* border: 1px solid white; */
+  }
+
+  .nav-bar-left {
+    width: 45%;
+    justify-content: flex-start;
+  }
+
+  .nav-bar-right {
+    width: 60%;
+    justify-content: flex-end;
+  }
+
+  .nav-link {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    padding: 5px;
+    min-width: 90px;
+    align-items: center;
+    border-left: none;
+    border-right: none;
+    border-bottom: 3px solid rgb(37, 37, 37);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgb(176, 176, 176);
+  }
+
+  .nav-link:hover {
+    color: var(--main-pink);
+  }
+
+  .active {
+    color: var(--main-pink);
+    border-bottom: 3px solid var(--main-pink);
+  }
+
+  .search-field {
+    background: rgb(73, 73, 73);
+    margin: 13px;
+    width: 300px;
+    padding-left: 10px;
+    border: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .search-field:focus {
+    color: rgb(176, 176, 176);
+    background: rgb(73, 73, 73);
+    border: none;
+  }
+
+  .search-field:active,
+  .search-field:focus {
+    border: none;
+  }
+
+  .search-btn {
+    background: rgb(77, 77, 77);
+    display: inline-block;
+    margin: 13px 0 13px -10px;
+    padding: 0 2px 0 2px;
+    width: 46px;
+    height: 44px;
+    border: none;
+    padding: 8px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  /* Toggle button */
+
+  .toggle-button {
+    /* position: absolute;
+    top: 1.5rem;
+    left: 1.3rem; */
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 35px;
+    height: 21px;
+  }
+
+  .toggle-button .bar {
+    height: 5px;
+    width: 100%;
+    background-color: var(--main-pink);
+    border: 0.5px solid rgb(221, 218, 218);
+    border-radius: 10px;
+    transition: all 1s ease;
+  }
+
+  .navbar-active {
+    height: 0px;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 1100px) {
+
+    /* .navbar {
+    background: rgba(128, 128, 128, 0);
+    flex-direction: column;
+    align-items: flex-start; 
+    height: 0px;
+    width: 100%;
+  } */
+    .logo {
+      display: none;
+    }
+
+    .toggle-button {
+      display: flex;
+    }
+
+    .navbar-active {
+      background: var(--navbar-background);
+      height: 350px;
+      transition: all 0.3s ease;
+      width: 100%;
+      align-items: center;
+    }
+
+    .toggle-button {
+      display: flex;
+      transition: all 1s;
+    }
+
+    .toggle-button:hover {
+      transform: rotate(180deg);
+      color: 2px solid var(--navbar-color-hover);
+      transition: all 1s;
+    }
+
+    .navbar-links {
+      display: none;
+      width: 100%;
+    }
+
+    .navbar-links.active {
+      display: flex;
+      width: 100%;
+
+    }
+
+    .navbar-links ul {
+      flex-direction: column;
+      margin-left: 18%;
+      text-align: center;
+    }
+
+    .bar.active-top {
+      transform: translateY(9px) rotate(45deg);
+      transition: all 1s ease;
+    }
+
+    .bar.active-middle {
+      transform: scale(0);
+      transition: all 1s ease;
+    }
+
+    .bar.active-bottom {
+      transform: translateY(-9px) rotate(-45deg);
+      transition: all 1s ease;
+    }
+
+  }
+
+
+  .navbar-user-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: var(--padding);
+    cursor: pointer;
+  }
+
+  .navbar-user-img>img {
+    width: 40px;
+  }
+
+  .user-dropdown {
+    width: 100px;
+    font-size: 1.2rem;
+    transition: 1s all ease;
+  }
+</style>
+
+
+<header class="header">
+  <a href="#" class="toggle-button">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </a>
+
+  <a class="logo" href="{% url 'home' %}">
+    <img height="50" src="/media/navbar_imgs/replay_img_light.png" alt="">
+  </a>
+
+  <div class="nav-bar nav-bar-left">
+    <!-- <a class="nav-link {#% if request.path == '/' %}active{#% endif %}" href="{#% url 'home' %}">Home</a> -->
+
+    <form class="d-flex justify-content-center" method="POST" action="{% url 'search-results' %}">
+      {% csrf_token %}
+      <input class="search-field" name="search" type="search" placeholder="Search YouTube" aria-label="Search">
+      <input class="search-btn" title="Search on YouTube" type="image" src="/media/navbar_imgs/search.png" name="submit"
+        value="Search">
+
+    </form>
+
+  </div>
+
+  <div class="nav-bar nav-bar-right">
+
+    {% if user.is_superuser %}
+    <a class="nav-link {% if request.path == '/all_videos/' %}active{% endif %}" href="{% url 'all_videos' %}">Top
+      list</a>
+    <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+    <a class="nav-link {% if request.path == '/updates/' %}active{% endif %}" href="{% url 'updates' %}">Updates</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <a class="nav-link {% if '/my_music/' in request.path %}active{% endif %}" href="{% url 'history' %}">My Music
+    </a>
+
+    <a class="nav-link text-3-dots {% if request.path == '/user/' %}active{% endif %}"
+      href="{% url 'user' %}">{{user.username}}
+    </a>
+
+    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a>
+    {% endif %}
+
+
+    <div class="navbar-user-img" id="dropdownMenuButton1" title="User menu" data-bs-toggle="dropdown">
+      {% if request.user.profile.image %}
+      <img src="{{request.user.profile.image.url}}" alt="" />
+      {% else %}
+      <img src="/media/profile_pics/navbar-user.png" alt="" />
+      {% endif %}
+    </div>
+    <ul class="dropdown-menu user-dropdown" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="{% url 'user' %}">{{user.username}}</a></li>
+      <li><a class="dropdown-item" href="">User profile</a></li>
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+
+  </div>
+</header>

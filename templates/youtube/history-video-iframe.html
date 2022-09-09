@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<div class="iframe">
+  <div
+    id="video_iframe"
+    data-video="{{video.videoId}}"
+    data-start="{{video.start}}"
+    data-end="{{video.end}}"
+    data-duration="{{video.duration}}"
+    >
+    <!-- The content of this div is written using JavaScript -->
+  </div>
+  {% include 'youtube/history-video-iframe-info.html' %}
+</div>
+
+<!-- Hidden button -->
+<a id="update-counter" style="display: none;"
+  hx-post="{% url 'update_counter' video.id %}"
+  hx-target="#iframe-info"
+  >
+</a>
+
+<script async src="https://www.youtube.com/iframe_api"></script>
+<script async src="{% static 'js/player.js' %}"></script>

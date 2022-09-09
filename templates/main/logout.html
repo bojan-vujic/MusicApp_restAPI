@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+
+{% block body_block %}
+<center>
+  <div class="whole-screen" style="backdrop-filter: blur(3px); margin:0">
+    <h3 class="ms-auto">You are logged out.</h3>
+    <div>
+      <a style="width: 120px" href="{% url 'login' %}" class="btn btn-secondary btn-custom">Login again?</a>
+    </div>
+  </div>
+</center>
+{% endblock %}

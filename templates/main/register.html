@@ -1,0 +1,27 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+{% if registered %}
+<div class="signup-message">
+  <h1>Thank you for registering<br>You can update your profile info in your profile page.</h1>
+  <a href="{% url 'home' %}">OK</a>
+</div>
+{% else %}
+<div class="signup-form">
+  <h3>User registration form</h3>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <i class="far fa-eye" id="togglePassword"
+      style="z-index: 20; margin-left: 380px; cursor: pointer; transform: translateY(-47px);">
+    </i>
+    
+    <input class="btn btn-secondary btn-block" type="submit" name="submit" value="Signup">
+  </form>
+</div>
+
+{% endif %}
+
+<script src="{% static 'js/showPassword.js' %}"></script>
+{% endblock %}

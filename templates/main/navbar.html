@@ -1,0 +1,94 @@
+
+<style>
+  .active {
+    color: var(--main-pink);
+    border-bottom: 3px solid var(--main-pink);
+  }
+</style>
+
+<header class="header">
+
+  <a class="toggle-button">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </a>
+
+  <a class="logo" href="{% url 'home' %}">
+    <img height="50" src="/media/navbar_imgs/replay_img_light.png" alt="">
+  </a>
+  
+  <div class="nav-bar nav-bar-left">
+ 
+    {% if user.is_authenticated %}
+      <form class="d-flex justify-content-center" method="POST" action="{% url 'search-results' %}">
+        {% csrf_token %}
+        <input class="search-field" name="search" type="search" placeholder="Search YouTube" aria-label="Search">
+        <input class="search-btn" title="Search on YouTube" type="image" src="/media/navbar_imgs/search.png" name="submit" value="Search">
+      </form>
+    {% else %}
+      <input class="search-field" placeholder="Search YouTube">
+      
+      <a href="{% url 'account_needed' %}">
+        <img id="yt-search-btn"
+        title="You need an account to perform search."
+        class="search-btn" src="/media/navbar_imgs/search.png" alt="" >
+      </a>
+    {% endif %}
+  </div>
+  
+  <div class="nav-bar nav-bar-right">
+    
+    {% if user.is_superuser %}
+      <a class="nav-link {% if request.path == '/all_videos/' %}active{% endif %}" href="{% url 'all_videos' %}">Top list</a>
+      <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+      <a class="nav-link {% if request.path == '/updates/' %}active{% endif %}" href="{% url 'updates' %}">Updates</a>
+    {% endif %}
+      
+    {% if user.is_authenticated %}
+      <a class="nav-link {% if '/my_music/' in request.path %}active{% endif %}"
+          href="{% url 'history' %}">My Music
+      </a>
+      
+      <a class="nav-link text-3-dots {% if request.path == '/user/' %}active{% endif %}"
+          href="{% url 'user' %}">{{user.username}}
+      </a>
+      
+    {% endif %}
+    
+  </div>
+  <div class="dropdown-arrow dots-active" id="dropdownMenuButton1" title="User menu" data-bs-toggle="dropdown">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+  </div>
+  <ul class="dropdown-menu user-dropdown" aria-labelledby="dropdownMenuButton1">
+    {% if user.is_authenticated %}
+      <li><a class="dropdown-item" href="{% url 'user' %}">welcome, {{user.username}}</a></li>
+      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+    {% else %}
+      <a class="nav-link {% if request.path == '/login/' %}active{% endif %}" href="{% url 'login' %}">Login</a>
+
+    {% endif %}
+  </ul>
+
+  
+</header>
+
+<div class="sidebar">
+  <a class="sidebar-nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+  
+  {% if user.is_authenticated %}
+  <a class="sidebar-nav-link {% if '/my_music/' in request.path %}active{% endif %}" href="{% url 'history' %}">My Music
+  </a>
+  {% endif %}
+
+  {% if user.is_superuser %}
+  <a class="sidebar-nav-link {% if request.path == '/all_videos/' %}active{% endif %}" href="{% url 'all_videos' %}">Top
+    list</a>
+  <a class="sidebar-nav-link" href="{% url 'admin:index' %}">Admin</a>
+  <a class="sidebar-nav-link {% if request.path == '/updates/' %}active{% endif %}"
+    href="{% url 'updates' %}">Updates</a>
+  {% endif %}
+
+</div>

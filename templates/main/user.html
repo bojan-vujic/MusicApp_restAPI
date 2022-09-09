@@ -1,0 +1,127 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load formtags %}
+
+{% block title %}{{user.username}}{% endblock title %}
+
+{% block head_block %}
+  <link rel="stylesheet" href="{% static 'css/user.css' %}">
+{% endblock %}
+
+{% block body_block %}
+
+{% if request.path == "/user/" %}
+  <h1 class="jumbotron">User page</h1>
+{% else %}
+  <h1 class="jumbotron">Blog page</h1>
+{% endif %}
+
+<div class="profile-card">
+  <div class="profile-pic">
+    {% if request.user.profile.image %}
+      <img src="{{request.user.profile.image.url}}" alt="" />
+    {% else %}
+      <img src="/media/profile_pics/default.png" alt="" />
+    {% endif %}
+  </div>
+  <div class="welcome">Welcome back!</div>
+  <div class="user-data">User name: <b>{{user.username}}</b></div>
+  <div class="user-data">Email: <b>{{user.email}}</b></div>
+</div>
+
+<ul>
+  <li>
+    <h3>username: {{user.username}}</h3>
+  </li>
+  <li>
+    <h3>is_staff: {{user.is_staff}}</h3>
+  </li>
+  <li>
+    <h3>is_superuser: {{user.is_superuser}}</h3>
+  </li>
+  <li>
+    <h3>email: {{user.email}}</h3>
+  </li>
+  <li>
+    <h3>date_joined: {{user.date_joined}}</h3>
+  </li>
+  <li>
+    <h3>favourites: {{user.favourites}}</h3>
+  </li>
+  <li>
+    <h3>first_name: {{user.first_name}}</h3>
+  </li>
+  <li>
+    <h3>groups: {{user.groups}}</h3>
+  </li>
+  <li>
+    <h3>id: {{user.id}}</h3>
+  </li>
+  <li>
+    <h3>is_active: {{user.is_active}}</h3>
+  </li>
+  <li>
+    <h3>last_login: {{user.last_login}}</h3>
+  </li>
+  <li>
+    <h3>last_name: {{user.last_name}}</h3>
+  </li>
+  <li>
+    <h3>lastsearch: {{user.lastsearch}}</h3>
+  </li>
+  <li>
+    <h3>logentry: {{user.logentry}}</h3>
+  </li>
+  <li>
+    <h3>personal: {{user.personal}}</h3>
+  </li>
+  <li>
+    <h3>profile: {{user.profile}}</h3>
+  </li>
+  <li>
+    <h3>update: {{user.update}}</h3>
+  </li>
+  <li>
+    <h3>user_permissions: {{user.user_permissions}}</h3>
+  </li>
+</ul>
+
+<div class="signup-form">
+  <h3>User registration form</h3>
+  {% if user_form.errors %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <!-- {#{user_form.errors.as_text}} -->
+    <ul class="ul-error-list">
+      {% for key, value in user_form.errors.items %}
+      <li><strong>{{ value | striptags }}</strong></li>
+      {% endfor %}
+    </ul>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- {#{ user_form.as_p }} -->
+
+    {% for field in user_form %}
+    <div class="form-group">
+      {{ field.label_tag }}
+      {{ field.errors }}
+      {% if field.errors %}
+      {{ field|bclass:"form-control is-invalid" }}
+      {% else %}
+      {{ field|bclass:"form-control is-valid" }}
+      {% endif %}
+    </div>
+    {% endfor %}
+    
+    
+    <!-- <div class="margin"></div> -->
+    {{ profile_form.as_p }}
+    <input class="btn btn-secondary btn-block" type="submit" name="submit" value="Signup">
+  </form>
+</div>
+
+
+{% endblock %}

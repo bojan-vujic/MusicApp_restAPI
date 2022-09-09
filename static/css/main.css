@@ -1,0 +1,174 @@
+* {
+  padding: 0;
+  margin: 0;
+  color: #1a1f36;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.vh-110 {
+  min-height: 110vh;
+}
+
+.jss4 {
+  left: 0;
+  right: 0;
+  height: 100vh;
+  position: absolute;
+  z-index: 0;
+  background: url(/media/mesh.png) 100% 30% / cover;
+  transition: left 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  background: rgb(238, 238, 238);
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
+}
+
+.main-container {
+  width: 80%;
+  margin: 0 auto 0 auto;
+  padding: 0;
+}
+
+.whole-screen {
+  padding-top: 90px;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+#togglePassword {
+  width: 20px;
+}
+
+#togglePassword:hover {
+  cursor: pointer;
+}
+
+.signup-message {
+  position:fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  min-height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.signup-message a {
+  width: 100px;
+  padding: 5px;
+  border: 2px solid white;
+  background: rgb(190, 190, 190);
+  text-decoration: none;
+  color: white;
+}
+
+.signup-form,
+.update-form {
+  max-width: 450px;
+  margin: 50px auto 0 auto;
+  border: 2px solid rgb(215, 215, 215);
+  border-radius: 10px;
+  padding: 20px;
+  background: rgb(238, 238, 238);
+  box-shadow:
+    10px 0px 30px rgb(215, 215, 215),
+   -10px 0px 30px rgb(215, 215, 215);
+}
+
+.signup-form h3 {
+  width: 100%;
+  background: rgb(207, 207, 207);
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 10px;
+  z-index: 100;
+}
+
+.signup-form h4 {
+  font-size: 1rem;
+  margin-bottom: 13px;
+  text-decoration: none;
+}
+
+.signup-form h4 a:hover {
+  text-decoration: none;
+}
+
+.signup-form form {
+  font-size: 1rem;
+}
+
+.btn-block {
+  margin-top: 0px;
+  width: 100%;
+}
+
+.errorlist {
+  display: none;
+}
+
+.ul-error-list {
+  margin-left: -10px;
+}
+
+.ul-error-list li {
+  padding: 3px;
+}
+
+.btn-close {
+  transition: 0.5s all ease;
+}
+
+.btn-close:hover {
+  transform: rotate(-180deg);
+  transition: 1s all ease;
+}
+
+p label[for=id_image] {
+  margin-top: -100px;
+}
+
+.margin {
+  margin-top: -25px;
+}
+
+.whole-page {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(3px);
+  background: rgba(237, 237, 237, 0.336);
+}
+
+.btn-custom {
+  width: 75px;
+  margin: 0 10px 0 10px;
+}
+
+/* For text with 3 dots at the end */
+.text-3-dots {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

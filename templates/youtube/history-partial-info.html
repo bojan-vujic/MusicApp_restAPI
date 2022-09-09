@@ -1,0 +1,80 @@
+
+
+<div class="sm-info">
+  <div class="sm-info-header">
+    <div class="video-title">{{video.title}}</div>
+
+    <div class="sm-info-close">
+      <img src="/media/close.png" title="Close this info." />
+    </div>
+  </div>
+
+  <div class="sm-info-row">
+    <div class="title" style="width: calc(100% - 20px)">Play video</div>
+    <a href="{% url 'play_video' video.videoId %}" class="play-button info-value info-value-pl" style="width: 25px;">
+      <img src="/media/play-video.png" title="Play video." />
+    </a>
+  </div>
+
+  <div class="sm-info-row">
+    <div class="title" style="width: calc(100% - 20px)">
+      {% if video.ytvideo.id in hearted %}
+      Remove video from favourites
+      {% else %}
+      Heart video
+      {% endif %}
+    </div>
+    <a href="" hx-post="{% url 'heart_video' video.videoId %}" hx-target="#history-list" class="play-button info-value"
+      style="width: 25px;">
+      {% if video.ytvideo.id in hearted %}
+      <img src="/media/hearted-video.png" class="img-hearted" title="Remove video from favourites." />
+      {% else %}
+      <img src="/media/heart-video.png" class="img-heart" title="Add to favourites." />
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="sm-info-row">
+    <div class="title" style="width: calc(100% - 20px)">Remove from personal collection</div>
+    <a href="" hx-delete="{% url 'remove_video' video.videoId %}" hx-target="#history-list"
+      hx-confirm="Are you sure you wish to remove this video from your playlist?" class="play-button info-value"
+      style="width: 25px;">
+      <img src="/media/trash-can.png" class="img-trash-can" title="Remove video from personal list." />
+    </a>
+  </div>
+
+  <hr>
+
+  <div class="sm-info-row">
+    <div class="title"><img src="/media/people.png" />People played this video</div>
+    <div class="info-value">{{video.users_played}}</div>
+  </div>
+
+  <div class="sm-info-row">
+    <div class="title"><img src="/media/earth2.png" />Global repeats</div>
+    <div class="info-value">{{video.global_repeats}}</div>
+  </div>
+
+  <div class="sm-info-row">
+    <div class="title"><img src="/media/music-earth.png" style="opacity: 0.8" />Global replay time</div>
+    <div class="info-value">{{video.global_replays}}</div>
+  </div>
+
+  <hr>
+
+  <div class="sm-info-row">
+    <div class="title"><img src="/media/your-repeats.png" />Your repeats</div>
+    <div class="info-value">{{video.repeats}}</div>
+  </div>
+
+  <div class="sm-info-row">
+    <div class="title"><img src="/media/time_played.png" style="opacity: 0.8" />Your replay time</div>
+    <div class="info-value">{{video.your_replays}}</div>
+  </div>
+
+  <div class="sm-info-row">
+    <div class="title"><img src="/media/calendar.png" style="opacity: 0.8" />Last time played</div>
+    <div class="info-value">{{video.last_time_played}}</div>
+  </div>
+
+</div>

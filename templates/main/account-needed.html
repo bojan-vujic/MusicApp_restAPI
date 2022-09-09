@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+
+<div class="whole-page">
+  <div>
+    <h3 class="ms-auto">You need an account to perform this action.</h3>
+  </div>
+  
+  <div>
+    <a style="width: 120px" href="{% url 'login' %}" class="btn btn-secondary btn-custom">Login/Signup</a>
+    
+  </div>
+</div>
+
+
+{% endblock %}

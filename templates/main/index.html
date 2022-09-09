@@ -1,0 +1,46 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+  <div id="hist-bg" class="jss4"></div>
+  <div class="whole-screen">
+    <div class="iframe">
+      <h3 style="z-index: 20; color: whitesmoke;" id="screen-size">Screen size: </h3>
+
+      <div>
+        <iframe id="index-iframe-video"
+          width="720" height="405"
+          src="https://www.youtube.com/embed/{{video.videoId}}?rel=0?version=3&autoplay=1&controls=1&showinfo=0&loop=1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+          title="YouTube video player" frameborder="0"
+          allowfullscreen
+          frameborder="0">
+        </iframe>
+      </div>
+
+    </div>
+  </div>
+
+  
+
+  <script>
+    var mainDiv = document.getElementsByClassName('whole-screen')[0]
+    var iframe = document.getElementById('index-iframe-video')
+    var screenSize = document.querySelector('#screen-size');
+    reportWindowSize()
+    
+    function reportWindowSize() {
+      screenSize.innerHTML = "Screen size :  " + window.innerWidth + " x " + window.innerHeight + " px";
+      var width = mainDiv.offsetWidth
+      var height = width * 9 / 16
+      if (window.innerWidth <= 900) { 
+        iframe.width = width
+        iframe.height = height
+      }
+    }
+    window.onresize = reportWindowSize;
+  </script>
+
+{% endblock %}
+

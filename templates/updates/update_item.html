@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+
+
+  <div class="update-form">
+    <h3 class="text-center">Update item</h3>
+    
+    <form method="POST">
+      {% csrf_token %}
+      
+      <div class="form-group mt-3">
+        <label for="id_update">Updated with:</label>
+        <textarea name="id_update" rows="4" class="form-control">{{update.item}}</textarea>
+      </div>
+      
+      <div class="form-group mt-3">
+        <label for="id_date">Date:</label>
+        <input type="text" disabled value="{{update.date_added}}" name="id_date" class="form-control">
+      </div>
+      
+      <input class="btn btn-secondary btn-block mt-3" type="submit" name="submit" value="Update item">
+    </form>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+
+{% load staticfiles %}
+
+<div id="history-list">
+  {% for video in videos %}
+    <div class="video-container"
+      title="Video: {{forloop.counter}} of {{total_videos}}">
+
+      <a href="{% url 'play_video' video.videoId %}" class="video-thumbnail" title="Play this video">
+        <img src="{{video.thumbnail}}"/>
+      </a>
+      
+      <div class="video-title-info">
+        <div class="video-title">{{video.title}}</div>
+        
+        <div class="video-info">
+
+          <div class="video-info-icon" title="Last time played : {{video.last_played}}">
+            <img src="/media/calendar.png"/>
+            <div class="ltpl">{{video.last_played|timesince}}</div>
+          </div>
+
+          <div class="video-info-icon" title="Your repeats : {{video.repeats}}">
+            <img src="/media/your-repeats.png"/>
+            <div class="your-video-repeats">{{video.repeats}}</div>
+          </div>
+          
+          <div class="video-info-icon" title="Video duration: {{video.mmss}}">
+            <img src="/media/clock.png"/><div>{{video.mmss}}</div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="video-buttons">
+        <a href="{% url 'play_video' video.videoId %}" class="play-button">
+          <img src="/media/play-video.png" title="Play video."/>
+        </a>
+        
+        <a href="" class="remove-from-personal"
+          hx-delete="{% url 'remove_video' video.videoId %}"
+          hx-target="#history-list"
+          hx-confirm="Are you sure you wish to remove this video from your playlist?">
+          <img src="/media/trash-can.png" title="Remove video from personal list." />
+        </a>
+      </div>
+      
+      <div
+        class="favs {% if video.ytvideo.id in hearted %}favs-visible{% else %}favs-hide{% endif %}">
+        <a href=""
+          hx-post="{% url 'heart_video' video.videoId %}"
+          hx-target="#history-list">
+          {% if video.ytvideo.id in hearted %}
+            <img src="/media/hearted-video.png" title="Remove video from favourites." />
+          {% else %}
+            <img src="/media/heart-video.png" title="Add to favourites." />
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="show-buttons" title="Show additional info.">
+        <span class="dot-info"></span>
+        <span class="dot-info"></span>
+        <span class="dot-info"></span>
+      </div>
+      
+    </div>
+
+    <!-- Info div below main video container -->
+    <div id="sm-info">
+      {% include 'youtube/history-partial-info.html' %}
+    </div>
+    
+
+  {% endfor %}
+</div>
+
+<script src="{% static 'js/history-partials.js' %}"></script>
+
+
+<script>
+  var mainContainer = document.getElementById('history-list')
+  window.onresize = () => {
+      var iframeWidth = document.getElementById('video_iframe').offsetWidth
+      var windowWidth = window.innerWidth
+      mainContainer.style.width  = iframeWidth + 'px'
+  }
+</script>

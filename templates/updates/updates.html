@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+
+{% block body_block %}
+<title>Updates</title>
+
+<div id="update-list">
+  {% include 'updates/items.html' %}
+</div>
+
+<div class="m-5"></div>
+
+{% endblock %}

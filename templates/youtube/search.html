@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<div class="m-3"></div>
+<h3>{{api_key}}</h3>
+<h3>{{api_index}}</h3>
+
+{% if no_results %}
+  <div class="mt-5 p-5">
+    <h3 class="row dflex justify-content-center text-center">You don't have previous search to show and your current search field is empty, please try again.</h3>
+  </div>
+{% else %}
+  <div class="row mt-5 mb-1">
+    <div class="row d-flex justify-content-center m-4 long-text"><h3>{{title}}</h3></div>
+    <h4 class="row ms-1">You searched for: {{search_string}}</h4>
+    <h4 class="row ms-1">Date: {{date_string}}</h4>
+    <h4 class="row ms-1">Total results: {{totalResults}}</h4>
+    <h4 class="row ms-1">First {{perPage}} are shown.</h4>
+  </div>
+  
+  <div class="album py-5 bg-light">
+    <div class="container">
+      {% include 'youtube/add_video.html' %}
+    </div>
+  </div>
+{% endif %}
+
+{% endblock %}

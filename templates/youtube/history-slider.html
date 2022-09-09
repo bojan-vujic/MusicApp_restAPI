@@ -1,0 +1,90 @@
+<div style="height: 5px;"></div>
+<form action="{% url 'update_interval' video_id=video.id %}" method="POST" id="sliderForm">
+  {% csrf_token %}
+  <div slider id="slider-distance">
+    <div>
+      <div inverse-left  style="width:70%; left: -1.7%"></div>
+      <div inverse-right style="width:70%; right:-1.7%"></div>
+      <div range></div>
+      <span thumb></span>
+      <span thumb></span>
+      <div sign>
+        <span id="value">{{video.startmmss}}</span>
+      </div>
+      <div sign>
+        <span id="value">{{video.endmmss}}</span>
+      </div>
+    </div> 
+    <input id="start" name="start_val" type="range" value="{{video.start}}"
+    min="0" max="{{video.duration}}" step="1" />
+    <input id="end"   name="end_val"   type="range" value="{{video.end}}"
+    min="0" max="{{video.duration}}" step="1" />
+  </div>
+</form>
+
+<script>
+  // 1 : inverse left
+  // 3 : inverse right
+  // 5 : range
+  // 7 : thumb left
+  // 9 : thumb right
+  //11 : thumb left text
+  //13 : thumb right text
+  
+  function fmtMSS(s) { return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s }
+
+  var video_start    = "{{video.start}}"
+  var video_end      = "{{video.end}}"
+  var video_duration = "{{video.duration}}"
+  var offsetleft  = (video_start / video_duration) * 100
+  var offsetright = (video_end   / video_duration) * 100
+  var video_range = (video_end   / video_duration) * 100
+  var overlap = 1.0 // to prevent slider circles from overlapping
+  var st = document.getElementById('start')
+  var en = document.getElementById('end')
+  var stval = (st.value / parseInt(st.max)) * 100
+  var enval = (en.value / parseInt(st.max)) * 100
+
+  // find all children elements in the slider div
+  var children = st.parentNode.childNodes[1].childNodes
+  for (let i of [5, 7, 11]) {children[i].style.left = offsetleft + "%"}
+  
+  children[1].style.width = offsetleft  + "%"
+  children[3].style.width = 100 - video_range + "%"
+  children[5].style.right = 100 - video_range + "%"
+  children[9].style.left  = video_range + "%"
+  children[13].style.left = video_range + "%"
+  
+  // attach even listener to start input field
+  st.addEventListener('input', () => {
+    st.value = Math.min(st.value, st.parentNode.childNodes[5].value - 1)
+    let value = (st.value / parseInt(st.max)) * 100
+    children[1].style.width = value + '%'
+    children[5].style.left  = value + '%'
+    children[7].style.left  = value - overlap + '%'
+    children[11].style.left = value - overlap + '%'
+    children[11].childNodes[1].innerHTML = fmtMSS(st.value)
+  })
+
+  // attach even listener to end input field
+  en.addEventListener('input', () => {
+    en.value = Math.max(en.value, en.parentNode.childNodes[3].value - (-1));
+    let value = (en.value / parseInt(en.max)) * 100
+    children[3].style.width = (100 - value) + '%';
+    children[5].style.right = (100 - value) + '%';
+    children[9].style.left = value + overlap + '%';
+    children[13].style.left = value + overlap + '%';
+    children[13].childNodes[1].innerHTML = fmtMSS(en.value);
+  })
+
+  // attach even listeners to input field and on change submit the form
+  for (let el of [st, en]) {
+    el.addEventListener('change', () => {
+      setTimeout(() => {
+        document.forms.sliderForm.submit()
+      }, 500)
+    })
+  }
+
+</script>
+

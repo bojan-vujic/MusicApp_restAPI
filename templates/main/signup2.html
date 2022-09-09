@@ -1,0 +1,59 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% load formtags %}
+
+{% block body_block %}
+
+  {% if registered %}
+  <div class="signup-message">
+    <h1>Thank you for registering<br>You can update your profile info in your profile page.</h1>
+    <a href="{% url 'home' %}">OK</a>
+  </div>
+  {% else %}
+    <div class="signup-form">
+      <h3>User registration form</h3>
+      {% if user_form.errors %}
+      <div id="error-div" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <!-- {#{user_form.errors.as_text}} -->
+        <ul class="ul-error-list">
+          {% for key, value in user_form.errors.items %}
+          <li><strong>{{ value | striptags }}</strong></li>
+          {% endfor %}
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group mb-2">
+          {{ user_form.username.label_tag }}
+          {% render_field user_form.username class="form-control" id="username-field" hx-post="/check_username/" hx-trigger="keyup" hx-target="#username-error" hx-swap="innerhtml"%}
+        </div>
+        <div class="mb-2" id="username-error"></div>
+          
+        <div class="form-group mb-2">
+          {{ user_form.email.label_tag }}
+          {% render_field user_form.email class="form-control" %}
+        </div>
+        
+        <div class="form-group">
+          {{ user_form.password.label_tag }}
+          {% render_field user_form.password class="form-control" %}
+
+          <i class="far fa-eye" id="togglePassword"
+            style="z-index: 20; margin-left: 375px; cursor: pointer; transform: translateY(-31px);">
+          </i>
+        </div>
+        <div id="password-error">error</div>
+
+        {{ profile_form.as_p }}
+        <input class="btn btn-secondary btn-block" type="submit" name="submit" value="Signup">
+      </form>
+    </div>
+
+  {% endif %}
+  
+  <script src="{% static 'js/showPassword.js' %}"></script>
+{% endblock %}

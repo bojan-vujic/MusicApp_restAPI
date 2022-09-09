@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+
+<div class="whole-page">
+  <div>
+    <h3 class="ms-auto">Are you sure you want to delete this item?</h3>
+  </div>
+  
+  <div>
+    <a href="{% url 'delete_item' item.id %}" class="btn btn-danger btn-custom">Yes</a>
+    <a href="{% url 'updates' %}" class="btn btn-success btn-custom">No</a>
+  </div>
+</div>
+
+
+{% endblock %}

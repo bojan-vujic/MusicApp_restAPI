@@ -239,5 +239,4 @@ def update_counter(request, video_id = None):
 
 
 def show_info(request):
-
   return render(request, 'youtube/history-partial-info.html', {})

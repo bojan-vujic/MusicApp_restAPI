@@ -12,3 +12,11 @@ def all_videos(request):
 
   serializer = VideoSerializers(item, many=True)
   return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def single_video(request, id):
+  item = Video.objects.filter(pk = id).first()
+
+  serializer = VideoSerializers(item, many=True)
+  return Response(serializer.data, status=status.HTTP_200_OK)

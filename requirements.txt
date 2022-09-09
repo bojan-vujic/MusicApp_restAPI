@@ -6,3 +6,4 @@ django-formtags
 Pillow
 django-extensions
 djangorestframework
+django-cors-headers

@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
     'django_extensions',
     'bootstrap5',
     'widget_tweaks',
@@ -63,7 +65,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    #'django.middleware.common.CommonMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 ROOT_URLCONF = 'book.urls'
 
@@ -80,7 +87,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries' : {
-                'staticfiles': 'django.templatetags.static', 
+                'staticfiles': 'django.templatetags.static',
             }
         },
     },
@@ -176,7 +183,6 @@ LOGIN_URL = 'login/'
 
 if os.getcwd() == '/home/bojan':
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 
 
 #YOUTUBE_SEARCH_API_KEY = 'AIzaSyCFI6phHEEG2XmbHDPtwI_Ku1zr8qi6epI'

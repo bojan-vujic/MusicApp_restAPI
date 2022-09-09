@@ -1,0 +1,130 @@
+// {
+//     "explorer.confirmDragAndDrop": false,
+//     "editor.tabSize": 2,
+//     "json.format.enable": false,
+//     "editor.rulers": []
+// }
+{
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+
+    // Workbench options
+    "workbench.tree.indent": 15,
+    "window.restoreWindows": "none",
+    "files.hotExit": "off",
+    "workbench.editor.enablePreview": false,
+    //"workbench.list.openMode": "doubleClick",
+
+    //  Editor options default
+    //"editor.rulers": [50, 72, 80],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+
+    // Editor options language specific
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "editor.renderWhitespace": "all",
+
+    "[markdown]": {
+        //"editor.rulers": [80],
+        "editor.insertSpaces": true,
+        "files.trimTrailingWhitespace": false
+    },
+
+    "[json]": {
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+
+    "[python]": {
+        "editor.tabSize": 2,
+        //"editor.rulers": [72, 79],
+    },
+
+    "[typescript]": {
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        //"editor.rulers": [80]
+    },
+
+    "[html]": {
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        //"editor.rulers": [80],
+        "editor.suggest.insertMode": "replace",
+        //"gitlens.codeLens.scopes": ["document"]
+    },
+
+    "[git-commit]": {
+        //"editor.rulers": [50, 72],
+        "editor.tabSize": 2
+    },
+
+    // Highlight extension
+    "update.mode": "none",
+    "extensions.ignoreRecommendations": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.detectIndentation": false,
+    "editor.cursorWidth": 3,
+
+    "workbench.editor.wrapTabs": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "cSpell.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    // LINTING
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pydocstyleEnabled": true,
+    "python.linting.pycodestyleEnabled": true,
+    // These pylint args are  specific for valuechecker repos,
+    // they can/should go in the workspace settings.
+    "python.linting.pylintArgs": [
+        "--init-hook",
+        "import sys; sys.path+=['valuechecker']",
+        "--extension-pkg-whitelist=pydantic",
+        "--disable=arguments-differ",
+        "--disable=broad-except",
+        "--disable=duplicate-code",
+        "--disable=import-error",
+        "--disable=line-too-long",
+        "--disable=too-few-public-methods",
+        "--disable=too-many-arguments",
+        "--disable=too-many-boolean-expressions",
+        "--disable=too-many-branches",
+        "--disable=too-many-instance-attributes",
+        "--disable=too-many-lines",
+        "--disable=too-many-locals",
+        "--disable=too-many-nested-blocks",
+        "--disable=too-many-public-methods",
+        "--disable=too-many-return-statements",
+        "--disable=too-many-statements",
+        "--disable=unused-argument",
+        "--disable=wrong-import-order",
+    ],
+    "python.linting.flake8Args": [
+        "--ignore=E203,W503",
+        "--max-line-length=79",
+        "--max-doc-length=72",
+    ],
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    //"editor.fontFamily": "'JetBrainsMono NF', 'Times New Roman', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": false,
+    "git.mergeEditor": false,
+    "explorer.excludeGitIgnore": true,
+    "window.zoomLevel": 0.75,
+    "terminal.integrated.inheritEnv": false,
+    "python.linting.enabled": false,
+}

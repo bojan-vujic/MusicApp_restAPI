@@ -3,8 +3,10 @@ from . import views
 
 urlpatterns = [
     #path('', views.index, name='home'),
-    path('api/all_videos', views.all_videos, name='api_all_videos'),
-    path('api/single_video/<id>', views.single_video, name='single_video'),
+    path('api/video', views.videoApi),
+    path('api/video/<id>', views.videoApi, name='videoApi'),
 
+    path('api/video-stat', views.videoStatApi),
+    path('api/video-stat/<id>', views.videoStatApi, name='videoStatApi'),
 
 ]

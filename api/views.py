@@ -1,22 +1,58 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from youtube.models import Video
-from .serializers import VideoSerializers
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+from . serializers import VideoSerializers, VideoStatSerializers
+from youtube.models import Video, VideoStat
 
-from rest_framework import serializers
-from rest_framework import status
+@csrf_exempt
+def videoApi(request, id=0):
+  method = request.method.upper()
 
-@api_view(['GET'])
-def all_videos(request):
-  item = Video.objects.all()
+  if method == 'GET':
+    videos = Video.objects.all()
+    serializer = VideoSerializers(videos, many = True)
+    return JsonResponse(serializer.data, json_dumps_params={'indent': 2}, safe = False)
 
-  serializer = VideoSerializers(item, many=True)
-  return Response(serializer.data, status=status.HTTP_200_OK)
+  elif method == 'POST':
+    data = JSONParser().parse(request)
+    serializer = VideoSerializers(data = data)
+    if serializer.is_valid():
+      serializer.save()
+      return JsonResponse('Video added.', safe = False)
+    return JsonResponse('Something went wrong.')
+
+  elif method == 'PUT':
+    data = JSONParser().parse(request)
+    video = Video.objects.get(pk = id)
+    serializer = VideoSerializers(video, data = data)
+    if serializer.is_valid():
+      serializer.save()
+      return JsonResponse('Video updated.', safe = False)
+    return JsonResponse('Something went wrong.')
 
 
-@api_view(['GET'])
-def single_video(request, id):
-  item = Video.objects.filter(pk = id).first()
+@csrf_exempt
+def videoStatApi(request, id=0):
+  method = request.method.upper()
 
-  serializer = VideoSerializers(item, many=True)
-  return Response(serializer.data, status=status.HTTP_200_OK)
+  if method == 'GET':
+    videos = VideoStat.objects.all()
+    serializer = VideoStatSerializers(videos, many = True)
+    return JsonResponse(serializer.data, json_dumps_params={'indent': 2}, safe = False)
+
+  elif method == 'POST':
+    data = JSONParser().parse(request)
+    serializer = VideoStatSerializers(data = data)
+    if serializer.is_valid():
+      serializer.save()
+      return JsonResponse('Video added.', safe = False)
+    return JsonResponse('Something went wrong.')
+
+  elif method == 'PUT':
+    data = JSONParser().parse(request)
+    video = VideoStat.objects.get(pk = id)
+    serializer = VideoStatSerializers(video, data = data)
+    if serializer.is_valid():
+      serializer.save()
+      return JsonResponse('Video updated.', safe = False)
+    return JsonResponse('Something went wrong.')

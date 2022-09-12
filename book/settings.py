@@ -69,8 +69,12 @@ MIDDLEWARE = [
     #'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8000',
+    'http://localhost:35241',
+    'http://localhost:4200'
+)
 
 ROOT_URLCONF = 'book.urls'
 
@@ -103,6 +107,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'NAME': os.path.join(BASE_DIR, 'oldDB.sqlite3'),
     }
 }
 

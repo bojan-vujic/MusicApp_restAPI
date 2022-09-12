@@ -10,5 +10,5 @@ class VideoSerializers(serializers.ModelSerializer):
 
 class VideoStatSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Video
+        model = VideoStat
         fields = ('__all__')

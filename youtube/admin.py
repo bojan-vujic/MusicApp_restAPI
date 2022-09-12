@@ -12,8 +12,12 @@ class LastSearchAdmin(admin.ModelAdmin):
 
 class VideoStatAdmin(admin.ModelAdmin):
     list_display  = ('username', 'videoId', 'title', 'last_played', 'replay_time', 'repeats', 'global_repeats', 'start', 'end', 'mmss', 'duration', 'id')
+    #list_display  = ('global_repeats','videoId', 'title', 'last_played', 'replay_time', 'repeats', 'global_repeats', 'start', 'end', 'mmss', 'duration', 'id')
     search_fields = ['videoId',]
 
 admin.site.register(Video, VideoAdmin)
 admin.site.register(LastSearch, LastSearchAdmin)
 admin.site.register(VideoStat, VideoStatAdmin)
+
+
+#f5ygXQKF6M8

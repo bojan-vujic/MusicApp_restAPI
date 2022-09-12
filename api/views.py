@@ -15,11 +15,14 @@ def videoApi(request, id=0):
 
   elif method == 'POST':
     data = JSONParser().parse(request)
-    serializer = VideoSerializers(data = data)
-    if serializer.is_valid():
-      serializer.save()
+    try:
+      for i in data:
+        serializer = VideoSerializers(data = i)
+        if serializer.is_valid():
+          serializer.save()
       return JsonResponse('Video added.', safe = False)
-    return JsonResponse('Something went wrong.')
+    except:
+      return JsonResponse('Something went wrong.', safe = False)
 
   elif method == 'PUT':
     data = JSONParser().parse(request)
@@ -29,6 +32,15 @@ def videoApi(request, id=0):
       serializer.save()
       return JsonResponse('Video updated.', safe = False)
     return JsonResponse('Something went wrong.')
+
+  elif method == 'DELETE':
+    try:
+      video = Video.objects.get(pk = id)
+      video.delete()
+      return JsonResponse('Video deleted.', safe = False)
+    except:
+      return JsonResponse('Something went wrong.', safe = False)
+
 
 
 @csrf_exempt

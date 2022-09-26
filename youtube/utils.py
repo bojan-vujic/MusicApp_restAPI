@@ -127,7 +127,7 @@ def YouTubeVideos(video_list, api_key):
 
 
 def video_data(request, video_id):
-  # get the data from users last search, that is where video info are stored
+  # get the data from user's last search, that is where video info are stored
   # info will be used for adding the video to user's personal collection
   last_search = LastSearch.objects.filter(user=request.user).values()
   json_data = str(last_search[0]['search']).replace("'", "\"")
